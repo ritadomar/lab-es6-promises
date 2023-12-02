@@ -60,6 +60,7 @@ getInstruction(
                     document.querySelector(
                       '#mashedPotatoes'
                     ).innerHTML += `<li>${step4}</li><li>Mashed potatoes are ready!</li>`;
+                    document.querySelector('#mashedPotatoesImg').hidden = false;
                   },
                   err => console.log(err)
                 );
@@ -120,10 +121,108 @@ obtainInstruction('steak', 0)
       (document.querySelector('#steak').innerHTML += `<li>${value}</li>`) &&
       obtainInstruction('steak', 9)
   )
-  .catch(err => console.log(err));
+  .catch(err => console.log(err))
+  .finally(() => {
+    document.querySelector('#steak').innerHTML += `<li>Steak is ready!</li>`;
+    document.querySelector('#steakImg').hidden = false;
+  });
 
 // Iteration 3 using async/await
 // ...
+async function makeBroccoli() {
+  // ... Your code here
+  try {
+    let step = await obtainInstruction('broccoli', 0);
+    document.querySelector('#broccoli').innerHTML += `<li>${step}</li>`;
+    step = await obtainInstruction('broccoli', 1);
+    document.querySelector('#broccoli').innerHTML += `<li>${step}</li>`;
+    step = await obtainInstruction('broccoli', 2);
+    document.querySelector('#broccoli').innerHTML += `<li>${step}</li>`;
+    step = await obtainInstruction('broccoli', 3);
+    document.querySelector('#broccoli').innerHTML += `<li>${step}</li>`;
+    step = await obtainInstruction('broccoli', 4);
+    document.querySelector('#broccoli').innerHTML += `<li>${step}</li>`;
+    step = await obtainInstruction('broccoli', 5);
+    document.querySelector('#broccoli').innerHTML += `<li>${step}</li>`;
+    step = await obtainInstruction('broccoli', 6);
+    document.querySelector('#broccoli').innerHTML += `<li>${step}</li>`;
+    document.querySelector(
+      '#broccoli'
+    ).innerHTML += `<li>Broccoli is ready!</li>`;
+    document.querySelector('#broccoliImg').hidden = false;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+makeBroccoli();
 
 // Bonus 2 - Promise all
 // ...
+const brussels0 = new Promise((resolve, reject) => {
+  if (!brusselsSprouts[0])
+    reject(console.log('Instruction step does not exist!'));
+  else resolve(brusselsSprouts[0]);
+});
+const brussels1 = new Promise((resolve, reject) => {
+  if (!brusselsSprouts[1])
+    reject(console.log('Instruction step does not exist!'));
+  else resolve(brusselsSprouts[1]);
+});
+const brussels2 = new Promise((resolve, reject) => {
+  if (!brusselsSprouts[2])
+    reject(console.log('Instruction step does not exist!'));
+  else resolve(brusselsSprouts[2]);
+});
+const brussels3 = new Promise((resolve, reject) => {
+  if (!brusselsSprouts[3])
+    reject(console.log('Instruction step does not exist!'));
+  else resolve(brusselsSprouts[3]);
+});
+const brussels4 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    if (!brusselsSprouts[4])
+      reject(console.log('Instruction step does not exist!'));
+    else resolve(brusselsSprouts[4]);
+  }, 3000);
+});
+const brussels5 = new Promise((resolve, reject) => {
+  if (!brusselsSprouts[5])
+    reject(console.log('Instruction step does not exist!'));
+  else resolve(brusselsSprouts[5]);
+});
+const brussels6 = new Promise((resolve, reject) => {
+  if (!brusselsSprouts[6])
+    reject(console.log('Instruction step does not exist!'));
+  else resolve(brusselsSprouts[6]);
+});
+const brussels7 = new Promise((resolve, reject) => {
+  if (!brusselsSprouts[7])
+    reject(console.log('Instruction step does not exist!'));
+  else resolve(brusselsSprouts[7]);
+});
+
+Promise.all([
+  brussels0,
+  brussels1,
+  brussels2,
+  brussels3,
+  brussels4,
+  brussels5,
+  brussels6,
+  brussels7,
+])
+  .then(allValues => {
+    return allValues.map(value => {
+      document.querySelector(
+        '#brusselsSprouts'
+      ).innerHTML += `<li>${value}</li>`;
+    });
+  })
+  .catch(err => console.log(err))
+  .finally(() => {
+    document.querySelector(
+      '#brusselsSprouts'
+    ).innerHTML += `<li>Brussels sprouts are ready!</li>`;
+    document.querySelector('#brusselsSproutsImg').hidden = false;
+  });
